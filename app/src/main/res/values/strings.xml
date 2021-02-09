@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ProjectOfMovies</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_settings">Settings</string>
+    <string name="desc_home">Notification list</string>
+    <string name="movie_title">Movie title</string>
+    <string name="default_imdb_rating">IMDb rating: 7,4</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="desc_settings">Preferences</string>
+    <string name="imdb_rating">IMDb rating</string>
+    <string name="default_rating">6</string>
+    <string name="movie_genres">Movie genres</string>
 </resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MyLinearLayout">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_home" style="@style/MyToolbar">
+        <TextView
+            android:text="@string/desc_home" style="@style/Toolbar_TextView"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recView_home" style="@style/MyRecyclerView"
+        xmlns:android="http://schemas.android.com/apk/res/android"/>
+</LinearLayout>
