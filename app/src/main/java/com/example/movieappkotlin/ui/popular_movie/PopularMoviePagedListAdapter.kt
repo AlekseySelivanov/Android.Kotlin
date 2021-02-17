@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.network_state_item.view.*
 import com.example.movieappkotlin.R
 import com.example.movieappkotlin.data.api.POSTER_BASE_URL
 import com.example.movieappkotlin.data.repository.NetworkState
-import com.example.movieappkotlin.data.vo.Movie
+import com.example.movieappkotlin.data.val_objects.Movie
 import com.example.movieappkotlin.ui.single_movie_details.SingleMovie
 
 
@@ -24,7 +24,6 @@ class PopularMoviePagedListAdapter(public val context: Context) : PagedListAdapt
     val NETWORK_VIEW_TYPE = 2
 
     private var networkState: NetworkState? = null
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

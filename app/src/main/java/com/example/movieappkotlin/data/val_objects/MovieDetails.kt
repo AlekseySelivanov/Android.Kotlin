@@ -1,4 +1,4 @@
-package com.example.movieappkotlin.data.vo
+package com.example.movieappkotlin.data.val_objects
 
 
 import com.google.gson.annotations.SerializedName

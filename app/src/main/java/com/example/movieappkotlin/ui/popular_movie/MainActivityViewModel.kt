@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.example.movieappkotlin.data.repository.NetworkState
-import com.example.movieappkotlin.data.vo.Movie
+import com.example.movieappkotlin.data.val_objects.Movie
 import io.reactivex.disposables.CompositeDisposable
 
 class MainActivityViewModel(private val movieRepository : MoviePagedListRepository) : ViewModel() {
@@ -23,10 +23,8 @@ class MainActivityViewModel(private val movieRepository : MoviePagedListReposito
         return moviePagedList.value?.isEmpty() ?: true
     }
 
-
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
     }
-
 }
