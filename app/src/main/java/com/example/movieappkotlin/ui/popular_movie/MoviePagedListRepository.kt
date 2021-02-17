@@ -7,7 +7,7 @@ import androidx.paging.PagedList
 import com.example.movieappkotlin.data.api.POST_PER_PAGE
 import com.example.movieappkotlin.data.api.TheMovieDBInterface
 import com.example.movieappkotlin.data.repository.NetworkState
-import com.example.movieappkotlin.data.vo.Movie
+import com.example.movieappkotlin.data.val_objects.Movie
 import com.oxcoding.moviemvvm.data.repository.MovieDataSource
 import com.oxcoding.moviemvvm.data.repository.MovieDataSourceFactory
 import io.reactivex.disposables.CompositeDisposable

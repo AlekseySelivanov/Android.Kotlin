@@ -12,18 +12,15 @@ import com.example.movieappkotlin.data.api.POSTER_BASE_URL
 import com.example.movieappkotlin.data.api.TheMovieDBClient
 import com.example.movieappkotlin.data.api.TheMovieDBInterface
 import com.example.movieappkotlin.data.repository.NetworkState
-import com.example.movieappkotlin.data.vo.MovieDetails
+import com.example.movieappkotlin.data.val_objects.MovieDetails
 import kotlinx.android.synthetic.main.activity_single__movie.*
 import java.text.NumberFormat
 import java.util.*
 
 class SingleMovie : AppCompatActivity() {
 
-
     private lateinit var viewModel: SingleMovieViewModel
     private lateinit var movieRepository: MovieDetailsRepository
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,10 +63,7 @@ class SingleMovie : AppCompatActivity() {
         Glide.with(this)
             .load(moviePosterURL)
             .into(iv_movie_poster);
-
-
     }
-
 
     private fun getViewModel(movieId:Int): SingleMovieViewModel {
         return ViewModelProvider(this, object : ViewModelProvider.Factory {

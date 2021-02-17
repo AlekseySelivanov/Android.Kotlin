@@ -1,9 +1,13 @@
 package com.example.movieappkotlin.ui.popular_movie
 
 
+import android.app.SearchManager
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -18,24 +22,16 @@ import com.oxcoding.moviemvvm.ui.popular_movie.PopularMoviePagedListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var viewModel: MainActivityViewModel
-
     lateinit var movieRepository: MoviePagedListRepository
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val apiService : TheMovieDBInterface = TheMovieDBClient.getClient()
-
         movieRepository = MoviePagedListRepository(apiService)
-
         viewModel = getViewModel()
-
         val movieAdapter = PopularMoviePagedListAdapter(this)
-
         val gridLayoutManager = GridLayoutManager(this, 3)
-
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 val viewType = movieAdapter.getItemViewType(position)
@@ -61,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun getViewModel(): MainActivityViewModel {
         return ViewModelProvider(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -70,4 +65,31 @@ class MainActivity : AppCompatActivity() {
             }
         })[MainActivityViewModel::class.java]
     }
-}
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_search,menu)
+
+        val manager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchItem = menu?.findItem(R.id.action_search)
+        val searchView = searchItem?.actionView as androidx.appcompat.widget.SearchView
+
+        searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                searchView.setQuery("", false)
+                searchItem.collapseActionView()
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+               return false
+            }
+        })
+        return true
+        }
+    }
+

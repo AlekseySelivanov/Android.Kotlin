@@ -1,7 +1,7 @@
 package com.example.movieappkotlin.data.api
 
-import com.example.movieappkotlin.data.vo.MovieDetails
-import com.example.movieappkotlin.data.vo.MovieResponse
+import com.example.movieappkotlin.data.val_objects.MovieDetails
+import com.example.movieappkotlin.data.val_objects.MovieResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
