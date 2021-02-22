@@ -1,4 +1,4 @@
-package com.oxcoding.moviemvvm.ui.popular_movie
+package com.example.movieappkotlin.ui.popular_movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

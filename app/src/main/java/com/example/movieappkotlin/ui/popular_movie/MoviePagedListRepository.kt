@@ -1,4 +1,4 @@
-package com.oxcoding.moviemvvm.ui.popular_movie
+package com.example.movieappkotlin.ui.popular_movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
@@ -8,8 +8,8 @@ import com.example.movieappkotlin.data.api.POST_PER_PAGE
 import com.example.movieappkotlin.data.api.TheMovieDBInterface
 import com.example.movieappkotlin.data.repository.NetworkState
 import com.example.movieappkotlin.data.val_objects.Movie
-import com.oxcoding.moviemvvm.data.repository.MovieDataSource
-import com.oxcoding.moviemvvm.data.repository.MovieDataSourceFactory
+import com.example.movieappkotlin.data.repository.MovieDataSource
+import com.example.movieappkotlin.data.repository.MovieDataSourceFactory
 import io.reactivex.disposables.CompositeDisposable
 
 class MoviePagedListRepository (private val apiService : TheMovieDBInterface) {
