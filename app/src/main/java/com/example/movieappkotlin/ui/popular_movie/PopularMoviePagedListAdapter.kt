@@ -1,4 +1,4 @@
-package com.oxcoding.moviemvvm.ui.popular_movie
+package com.example.movieappkotlin.ui.popular_movie
 
 import android.content.Context
 import android.content.Intent
@@ -18,7 +18,7 @@ import com.example.movieappkotlin.data.val_objects.Movie
 import com.example.movieappkotlin.ui.single_movie_details.SingleMovie
 
 
-class PopularMoviePagedListAdapter(public val context: Context) : PagedListAdapter<Movie, RecyclerView.ViewHolder>(MovieDiffCallback()) {
+class PopularMoviePagedListAdapter( val context: Context) : PagedListAdapter<Movie, RecyclerView.ViewHolder>(MovieDiffCallback()) {
 
     val MOVIE_VIEW_TYPE = 1
     val NETWORK_VIEW_TYPE = 2
