@@ -16,31 +16,30 @@ const val POST_PER_PAGE = 20
 // https://api.themoviedb.org/3/movie/popular?api_key=2ed305044c5949802bd1bb16a189324c&page=1
 // https://api.themoviedb.org/3/movie/550?api_key=2ed305044c5949802bd1bb16a189324c
 // https://image.tmdb.org/t/p/w342/8kNruSfhk5IoE4eZOc4UpvDn6tq.jpg
-
 object TheMovieDBClient {
     fun getClient(): TheMovieDBInterface {
         val requestInterceptor = Interceptor { chain ->
             val url = chain.request()
-                .url()
-                .newBuilder()
-                .addQueryParameter("api_key", API_KEY)
-                .build()
+                    .url()
+                    .newBuilder()
+                    .addQueryParameter("api_key", API_KEY)
+                    .build()
             val request = chain.request()
-                .newBuilder()
-                .url(url)
-                .build()
+                    .newBuilder()
+                    .url(url)
+                    .build()
             return@Interceptor chain.proceed(request)
         }
         val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(requestInterceptor)
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .build()
+                .addInterceptor(requestInterceptor)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .build()
         return Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(BASE_URL)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(TheMovieDBInterface::class.java)
+                .client(okHttpClient)
+                .baseUrl(BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(TheMovieDBInterface::class.java)
     }
 }

@@ -17,13 +17,13 @@ import com.example.movieappkotlin.data.repository.NetworkState
 import com.example.movieappkotlin.data.val_objects.Movie
 import com.example.movieappkotlin.ui.single_movie_details.SingleMovie
 
-
-class PopularMoviePagedListAdapter( val context: Context) : PagedListAdapter<Movie, RecyclerView.ViewHolder>(MovieDiffCallback()) {
+class PopularMoviePagedListAdapter(public val context: Context) : PagedListAdapter<Movie, RecyclerView.ViewHolder>(MovieDiffCallback()) {
 
     val MOVIE_VIEW_TYPE = 1
     val NETWORK_VIEW_TYPE = 2
 
     private var networkState: NetworkState? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -87,8 +87,8 @@ class PopularMoviePagedListAdapter( val context: Context) : PagedListAdapter<Mov
 
             val moviePosterURL = POSTER_BASE_URL + movie?.posterPath
             Glide.with(itemView.context)
-                .load(moviePosterURL)
-                .into(itemView.cv_iv_movie_poster);
+                    .load(moviePosterURL)
+                    .into(itemView.cv_iv_movie_poster);
 
             itemView.setOnClickListener{
                 val intent = Intent(context, SingleMovie::class.java)
