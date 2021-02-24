@@ -130,14 +130,14 @@ class MainActivity : AppCompatActivity() {
     progressDialog.show()
        url = when(nextToken){
            ""-> {
-               ("https://api.themoviedb.org/3/movie/popular?api_key=2ed305044c5949802bd1bb16a189324c&page=1")
+               ("https://api.themoviedb.org/3/search/multi?api_key=2ed305044c5949802bd1bb16a189324c&language=en-US&page=1&include_adult=false")
            }
            "end" -> {
-               ("https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher")
+               ("https://api.themoviedb.org/3/search/multi?api_key=2ed305044c5949802bd1bb16a189324c&language=en-US&page=1&include_adult=false")
                progressDialog.dismiss()
                return
            } else -> {
-               ("https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher")
+               ("https://api.themoviedb.org/3/search/multi?api_key=2ed305044c5949802bd1bb16a189324c&language=en-US&page=1&include_adult=false")
            }
        }
         val stringRequest = StringRequest(com.android.volley.Request.Method.GET, url, { response ->
@@ -180,14 +180,14 @@ class MainActivity : AppCompatActivity() {
         progressDialog.show()
         url = when(nextToken){
             ""-> {
-                ("https://api.themoviedb.org/3/search/movie?api_key=2ed305044c5949802bd1bb16a189324c&page=1")
+                ("https://api.themoviedb.org/3/search/multi?api_key=2ed305044c5949802bd1bb16a189324c&language=en-US&page=1&include_adult=false")
             }
             "end" -> {
-                ("https://api.themoviedb.org/3/movie/343611?api_key={2ed305044c5949802bd1bb16a189324c}")
+                ("https://api.themoviedb.org/3/search/multi?api_key=2ed305044c5949802bd1bb16a189324c&language=en-US&page=1&include_adult=false")
                 progressDialog.dismiss()
                 return
             } else -> {
-                ("https://api.themoviedb.org/3/movie/343611?api_key={2ed305044c5949802bd1bb16a189324c}")
+                ("https://api.themoviedb.org/3/search/multi?api_key=2ed305044c5949802bd1bb16a189324c&language=en-US&page=1&include_adult=false")
             }
         }
         val stringRequest = StringRequest(com.android.volley.Request.Method.GET, url, { response ->

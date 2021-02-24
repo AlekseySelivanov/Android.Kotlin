@@ -3,7 +3,6 @@ package com.example.movieappkotlin.data.repository
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.example.movieappkotlin.data.api.TheMovieDBInterface
-import com.example.movieappkotlin.data.repository.MovieDataSource
 import com.example.movieappkotlin.data.val_objects.Movie
 import io.reactivex.disposables.CompositeDisposable
 

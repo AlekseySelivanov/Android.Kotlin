@@ -11,7 +11,6 @@ interface TheMovieDBInterface {
     // https://api.themoviedb.org/3/movie/popular?api_key=2ed305044c5949802bd1bb16a189324c&page=1
     // https://api.themoviedb.org/3/movie/550?api_key=2ed305044c5949802bd1bb16a189324c
     // https://api.themoviedb.org/3/
-
     @GET("movie/popular")
     fun getPopularMovie(@Query("page") page: Int): Single<MovieResponse>
 

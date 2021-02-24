@@ -6,10 +6,10 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.movieappkotlin.data.api.POST_PER_PAGE
 import com.example.movieappkotlin.data.api.TheMovieDBInterface
-import com.example.movieappkotlin.data.repository.NetworkState
-import com.example.movieappkotlin.data.val_objects.Movie
 import com.example.movieappkotlin.data.repository.MovieDataSource
 import com.example.movieappkotlin.data.repository.MovieDataSourceFactory
+import com.example.movieappkotlin.data.repository.NetworkState
+import com.example.movieappkotlin.data.val_objects.Movie
 import io.reactivex.disposables.CompositeDisposable
 
 class MoviePagedListRepository (private val apiService : TheMovieDBInterface) {
@@ -21,9 +21,9 @@ class MoviePagedListRepository (private val apiService : TheMovieDBInterface) {
         moviesDataSourceFactory = MovieDataSourceFactory(apiService, compositeDisposable)
 
         val config = PagedList.Config.Builder()
-            .setEnablePlaceholders(false)
-            .setPageSize(POST_PER_PAGE)
-            .build()
+                .setEnablePlaceholders(false)
+                .setPageSize(POST_PER_PAGE)
+                .build()
 
         moviePagedList = LivePagedListBuilder(moviesDataSourceFactory, config).build()
 
@@ -32,6 +32,6 @@ class MoviePagedListRepository (private val apiService : TheMovieDBInterface) {
 
     fun getNetworkState(): LiveData<NetworkState> {
         return Transformations.switchMap<MovieDataSource, NetworkState>(
-            moviesDataSourceFactory.moviesLiveDataSource, MovieDataSource::networkState)
+                moviesDataSourceFactory.moviesLiveDataSource, MovieDataSource::networkState)
     }
 }
