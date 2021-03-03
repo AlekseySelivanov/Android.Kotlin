@@ -22,7 +22,6 @@ class MainActivityViewModel(private val movieRepository : MoviePagedListReposito
     fun listIsEmpty(): Boolean {
         return moviePagedList.value?.isEmpty() ?: true
     }
-
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()

@@ -140,10 +140,5 @@ class PopularMoviePagedListAdapter(public val context: Context) : PagedListAdapt
         } else if (hasExtraRow && previousState != newNetworkState) {
             notifyItemChanged(itemCount - 1)
         }
-
     }
-
-
-
-
 }
