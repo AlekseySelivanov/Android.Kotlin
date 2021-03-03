@@ -3,6 +3,7 @@ package com.example.movieappkotlin.ui.popular_movie
 import android.app.ProgressDialog
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -19,6 +20,7 @@ import com.example.movieappkotlin.data.api.TheMovieDBClient
 import com.example.movieappkotlin.data.api.TheMovieDBInterface
 import com.example.movieappkotlin.data.repository.NetworkState
 import com.example.movieappkotlin.data.val_objects.MovieDetails
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
@@ -39,6 +41,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
         val apiService : TheMovieDBInterface = TheMovieDBClient.getClient()
         movieRepository = MoviePagedListRepository(apiService)
         viewModel = getViewModel()
@@ -114,80 +120,29 @@ class MainActivity : AppCompatActivity() {
                 if (query != null) {
                     searchPosts(query)
                 }
-
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-               return false
+               return true
             }
 
         })
         return true
         }
 
-    private fun loadPosts(){
-    progressDialog.show()
-       url = when(nextToken){
-           ""-> {
-               ("https://api.themoviedb.org/3/search/multi?api_key=2ed305044c5949802bd1bb16a189324c&language=en-US&page=1&include_adult=false")
-           }
-           "end" -> {
-               ("https://api.themoviedb.org/3/search/multi?api_key=2ed305044c5949802bd1bb16a189324c&language=en-US&page=1&include_adult=false")
-               progressDialog.dismiss()
-               return
-           } else -> {
-               ("https://api.themoviedb.org/3/search/multi?api_key=2ed305044c5949802bd1bb16a189324c&language=en-US&page=1&include_adult=false")
-           }
-       }
-        val stringRequest = StringRequest(com.android.volley.Request.Method.GET, url, { response ->
-        progressDialog.dismiss()
-            try {
-            val jsonObject = JSONObject(response)
-                try {
-                nextToken = jsonObject.getString("nextPageToken")
-                }catch (e:java.lang.Exception){
-                nextToken = "end"
-                }
-                val jsonArray = jsonObject.getJSONArray("items")
-                for(i in 0 until jsonArray.length()){
-                    try {
-                    val jsonObject01 = jsonArray.getJSONObject(i)
-                    val id = jsonObject01.getString("id");
-                        val title = jsonObject01.getString("title");
-
-                        /// ModelPost
-                    }catch (e:java.lang.Exception){
-
-                    }
-                }
-                adapterPost = PopularMoviePagedListAdapter(this@MainActivity)
-                rv_movie_list.adapter = adapterPost
-                progressDialog.dismiss()
-            }catch (e:Exception){
-
-            }
-        }, {error->
-
-        })
-        val requestQueue = Volley.newRequestQueue(this)
-        requestQueue.add(stringRequest)
-
-    }
-
     private fun searchPosts(query: String){
         isSearch = true
         progressDialog.show()
         url = when(nextToken){
             ""-> {
-                ("https://api.themoviedb.org/3/search/multi?api_key=2ed305044c5949802bd1bb16a189324c&language=en-US&page=1&include_adult=false")
+                ("https://api.themoviedb.org/3/search/keyword?q=$query&api_key=2ed305044c5949802bd1bb16a189324c&page=1")
             }
             "end" -> {
-                ("https://api.themoviedb.org/3/search/multi?api_key=2ed305044c5949802bd1bb16a189324c&language=en-US&page=1&include_adult=false")
                 progressDialog.dismiss()
                 return
             } else -> {
-                ("https://api.themoviedb.org/3/search/multi?api_key=2ed305044c5949802bd1bb16a189324c&language=en-US&page=1&include_adult=false")
+                ("https://api.themoviedb.org/3/search/keyword?q=$query&api_key=2ed305044c5949802bd1bb16a189324c&page=1")
             }
         }
         val stringRequest = StringRequest(com.android.volley.Request.Method.GET, url, { response ->
@@ -196,22 +151,28 @@ class MainActivity : AppCompatActivity() {
                 val jsonObject = JSONObject(response)
                 try {
                     nextToken = jsonObject.getString("nextPageToken")
-                }catch (e:java.lang.Exception){
+                }catch (e:Exception){
                     nextToken = "end"
                 }
                 val jsonArray = jsonObject.getJSONArray("items")
                 for(i in 0 until jsonArray.length()){
                     try {
                         val jsonObject01 = jsonArray.getJSONObject(i)
-                        val id = jsonObject01.getString("id");
-                        val title = jsonObject01.getString("title");
+                        val budget = jsonObject01.getInt("budget");
+                        val id = jsonObject01.getInt("id");
+                        val overview = jsonObject01.getString("overview");
 
-                        /// ModelPost
-                    }catch (e:java.lang.Exception){
 
+//   val movieDetails = MovieDetails(
+//       "$budget",
+//       "$id"
+//   "$overview"
+//   )
+                    }catch (e:Exception){
                     }
                 }
                 adapterPost = PopularMoviePagedListAdapter(this@MainActivity)
+
                 rv_movie_list.adapter = adapterPost
                 progressDialog.dismiss()
             }catch (e:Exception){
@@ -222,6 +183,24 @@ class MainActivity : AppCompatActivity() {
         })
         val requestQueue = Volley.newRequestQueue(this)
         requestQueue.add(stringRequest)
+    }
+
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_home -> {
+                val i = Intent(this@MainActivity, MainActivity::class.java)
+                startActivity(i)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_settings -> {
+                val fragment = FragmentSettings()
+                supportFragmentManager.beginTransaction().replace(R.id.container, fragment, fragment.javaClass.getSimpleName())
+                    .commit()
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+
     }
 
     }

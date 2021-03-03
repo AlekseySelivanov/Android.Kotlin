@@ -1,10 +1,10 @@
 package com.example.movieappkotlin.data.repository
+
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.example.movieappkotlin.data.api.FIRST_PAGE
 import com.example.movieappkotlin.data.api.TheMovieDBInterface
-import com.example.movieappkotlin.data.repository.NetworkState
 import com.example.movieappkotlin.data.val_objects.Movie
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -15,7 +15,6 @@ class MovieDataSource (private val apiService : TheMovieDBInterface, private val
     private var page = FIRST_PAGE
 
     val networkState: MutableLiveData<NetworkState> = MutableLiveData()
-
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Movie>) {
 
@@ -31,6 +30,7 @@ class MovieDataSource (private val apiService : TheMovieDBInterface, private val
                                 },
                                 {
                                     networkState.postValue(NetworkState.ERROR)
+                                    it.message?.let { it1 -> Log.e("MovieDataSource", it1) }
                                 }
                         )
         )
@@ -54,6 +54,7 @@ class MovieDataSource (private val apiService : TheMovieDBInterface, private val
                                 },
                                 {
                                     networkState.postValue(NetworkState.ERROR)
+                                    it.message?.let { it1 -> Log.e("MovieDataSource", it1) }
                                 }
                         )
         )
@@ -62,5 +63,4 @@ class MovieDataSource (private val apiService : TheMovieDBInterface, private val
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
 
     }
-
 }
