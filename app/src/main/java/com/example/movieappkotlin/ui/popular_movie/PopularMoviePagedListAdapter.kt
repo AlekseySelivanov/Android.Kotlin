@@ -16,6 +16,7 @@ import com.example.movieappkotlin.data.api.POSTER_BASE_URL
 import com.example.movieappkotlin.data.repository.NetworkState
 import com.example.movieappkotlin.data.val_objects.Movie
 import com.example.movieappkotlin.ui.single_movie_details.SingleMovie
+import java.util.ArrayList
 
 class PopularMoviePagedListAdapter(public val context: Context) : PagedListAdapter<Movie, RecyclerView.ViewHolder>(MovieDiffCallback()) {
 
@@ -141,4 +142,5 @@ class PopularMoviePagedListAdapter(public val context: Context) : PagedListAdapt
             notifyItemChanged(itemCount - 1)
         }
     }
+
 }

@@ -6,8 +6,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import android.view.Menu
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -19,10 +22,12 @@ import com.example.movieappkotlin.R
 import com.example.movieappkotlin.data.api.TheMovieDBClient
 import com.example.movieappkotlin.data.api.TheMovieDBInterface
 import com.example.movieappkotlin.data.repository.NetworkState
+import com.example.movieappkotlin.data.val_objects.Movie
 import com.example.movieappkotlin.data.val_objects.MovieDetails
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -107,42 +112,35 @@ class MainActivity : AppCompatActivity() {
 
         searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
 
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                searchView.clearFocus()
-                searchView.setQuery("", false)
-                searchItem.collapseActionView()
 
-                nextToken = ""
-                url = ""
-                postArrayList = ArrayList()
-                postArrayList.clear()
-                if (query != null) {
-                    searchPosts(query)
-                }
-                return true
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-               return true
+
+                return true
             }
 
         })
         return true
         }
 
-    private fun searchPosts(query: String){
+
+    private fun searchPosts(q: String){
         isSearch = true
         progressDialog.show()
         url = when(nextToken){
             ""-> {
-                ("https://api.themoviedb.org/3/search/keyword?q=$query&api_key=2ed305044c5949802bd1bb16a189324c&page=1")
+                ("https://api.themoviedb.org/3/search/keyword?&query=$q&api_key=2ed305044c5949802bd1bb16a189324c&page=1")
             }
             "end" -> {
                 progressDialog.dismiss()
                 return
             } else -> {
-                ("https://api.themoviedb.org/3/search/keyword?q=$query&api_key=2ed305044c5949802bd1bb16a189324c&page=1")
+                ("https://api.themoviedb.org/3/search/keyword?&query=$q&api_key=2ed305044c5949802bd1bb16a189324c&page=1")
             }
         }
         val stringRequest = StringRequest(com.android.volley.Request.Method.GET, url, { response ->
@@ -158,15 +156,17 @@ class MainActivity : AppCompatActivity() {
                 for(i in 0 until jsonArray.length()){
                     try {
                         val jsonObject01 = jsonArray.getJSONObject(i)
-                        val budget = jsonObject01.getInt("budget");
+                        val posterPath = jsonObject01.getInt("posterPath");
                         val id = jsonObject01.getInt("id");
-                        val overview = jsonObject01.getString("overview");
+                        val releaseDate = jsonObject01.getString("releaseDate");
+                        val title = jsonObject01.getString("title");
 
 
-//   val movieDetails = MovieDetails(
-//       "$budget",
-//       "$id"
-//   "$overview"
+//   val movie = Movie(
+//       "$id",
+//   "$posterPath",
+//   "$releaseDate",
+//       "$title"
 //   )
                     }catch (e:Exception){
                     }
