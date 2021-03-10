@@ -1,9 +1,12 @@
 package com.example.movieappkotlin.ui.popular_movie
 
+import android.Manifest
 import android.app.ProgressDialog
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -11,7 +14,10 @@ import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
+import androidx.constraintlayout.motion.widget.Debug.getLocation
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -34,7 +40,6 @@ class MainActivity : AppCompatActivity() {
 
     private var url = ""
     private var nextToken = ""
-    private lateinit var postArrayList: ArrayList<MovieDetails>
     private lateinit var adapterPost: PopularMoviePagedListAdapter
     private lateinit var progressDialog: ProgressDialog
     private var isSearch = false
@@ -58,13 +63,6 @@ class MainActivity : AppCompatActivity() {
 
         progressDialog = ProgressDialog(this)
         progressDialog.setTitle("Please, wait...")
-
-        postArrayList = ArrayList()
-        postArrayList.clear()
-
-
-
-
 
 
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -91,7 +89,9 @@ class MainActivity : AppCompatActivity() {
                 movieAdapter.setNetworkState(it)
             }
         })
+
     }
+
     private fun getViewModel(): MainActivityViewModel {
         isSearch = false
         return ViewModelProvider(this, object : ViewModelProvider.Factory {
