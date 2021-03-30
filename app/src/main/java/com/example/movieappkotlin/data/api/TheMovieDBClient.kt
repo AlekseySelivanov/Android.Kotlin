@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.Future
 import java.util.concurrent.TimeUnit
 
 const val API_KEY = "2ed305044c5949802bd1bb16a189324c"
@@ -47,4 +48,4 @@ object TheMovieDBClient {
                 .build()
                 .create(TheMovieDBInterface::class.java)
     }
-}
+    }

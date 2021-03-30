@@ -12,12 +12,14 @@ import com.example.movieappkotlin.data.repository.NetworkState
 import com.example.movieappkotlin.data.val_objects.Movie
 import io.reactivex.disposables.CompositeDisposable
 
-class MoviePagedListRepository (private val apiService : TheMovieDBInterface) {
+class MoviePagedListRepository(private val apiService: TheMovieDBInterface) {
 
     lateinit var moviePagedList: LiveData<PagedList<Movie>>
     lateinit var moviesDataSourceFactory: MovieDataSourceFactory
 
-    fun fetchLiveMoviePagedList (compositeDisposable: CompositeDisposable) : LiveData<PagedList<Movie>> {
+
+
+    fun fetchLiveMoviePagedList(compositeDisposable: CompositeDisposable) : LiveData<PagedList<Movie>> {
         moviesDataSourceFactory = MovieDataSourceFactory(apiService, compositeDisposable)
 
         val config = PagedList.Config.Builder()
@@ -34,4 +36,10 @@ class MoviePagedListRepository (private val apiService : TheMovieDBInterface) {
         return Transformations.switchMap<MovieDataSource, NetworkState>(
                 moviesDataSourceFactory.moviesLiveDataSource, MovieDataSource::networkState)
     }
+
+
+
+
+
+
 }

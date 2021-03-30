@@ -90,4 +90,6 @@
         app:maxImageSize="@dimen/fab_location_icon_size"
         android:contentDescription="@string/set_my_location" />
 
+
+
 </LinearLayout>
