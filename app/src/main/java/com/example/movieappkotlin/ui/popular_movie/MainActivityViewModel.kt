@@ -7,7 +7,7 @@ import com.example.movieappkotlin.data.repository.NetworkState
 import com.example.movieappkotlin.data.val_objects.Movie
 import io.reactivex.disposables.CompositeDisposable
 
-class MainActivityViewModel(private val movieRepository : MoviePagedListRepository) : ViewModel() {
+class MainActivityViewModel(private val movieRepository: MoviePagedListRepository) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -26,4 +26,6 @@ class MainActivityViewModel(private val movieRepository : MoviePagedListReposito
         super.onCleared()
         compositeDisposable.dispose()
     }
-}
+
+
+    }

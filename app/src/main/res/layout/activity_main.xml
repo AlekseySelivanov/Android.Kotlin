@@ -19,16 +19,14 @@
             android:id="@+id/progress_bar_popular"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:visibility="gone" />
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/txt_error_popular"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Connection Problem!!"
-            android:visibility="gone" />
+            android:text="Connection Problem!!" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_movie_list"
@@ -41,12 +39,16 @@
 
     </LinearLayout>
 
+
+
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         android:id="@+id/container"
        >
+
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
@@ -57,11 +59,7 @@
             app:menu="@menu/bottom_nav_menu"
             />
 
-
     </FrameLayout>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
