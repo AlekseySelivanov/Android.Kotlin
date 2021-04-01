@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Connection Problem!!" />
+            android:text="@string/connection_problem" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_movie_list"
@@ -58,7 +58,11 @@
             android:background="#6986c2"
             app:menu="@menu/bottom_nav_menu"
             />
-
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
     </FrameLayout>
 
 

@@ -78,6 +78,9 @@
             android:layout_marginRight="16dp"
             android:id="@+id/recView_settings"/>
     </androidx.cardview.widget.CardView>
+
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/mainFragmentFABLocation"
         android:layout_width="wrap_content"

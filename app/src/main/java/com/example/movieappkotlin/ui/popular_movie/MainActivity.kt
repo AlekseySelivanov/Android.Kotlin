@@ -14,16 +14,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+
 import com.example.movieappkotlin.R
 import com.example.movieappkotlin.data.api.TheMovieDBClient
 import com.example.movieappkotlin.data.api.TheMovieDBInterface
 import com.example.movieappkotlin.data.repository.NetworkState
+import com.example.movieappkotlin.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityMainBinding
     private var url = ""
     private var nextToken = ""
     private lateinit var adapterPost: PopularMoviePagedListAdapter
@@ -37,7 +39,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.textView2.text = getString(R.string.hello)
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.nav_view)
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
