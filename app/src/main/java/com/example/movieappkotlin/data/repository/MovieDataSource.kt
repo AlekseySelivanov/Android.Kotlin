@@ -59,12 +59,6 @@ class MovieDataSource (private val apiService : TheMovieDBInterface, private val
                         )
         )
     }
-
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
     }
-
-
-
-
-
 }
