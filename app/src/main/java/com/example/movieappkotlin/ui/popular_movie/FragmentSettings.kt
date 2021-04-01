@@ -20,12 +20,14 @@ import androidx.constraintlayout.motion.widget.Debug
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieappkotlin.R
+import com.example.movieappkotlin.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import java.io.IOException
 
 const val REQUEST_CODE = 42
 class FragmentSettings : Fragment() {
+
 
     private var isDataSetWorld: Boolean = false
     private val REFRESH_PERIOD = 60000L
@@ -47,7 +49,10 @@ class FragmentSettings : Fragment() {
     ): View? =
         inflater.inflate(R.layout.fragment_settings, container, false)
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
         super.onViewCreated(view, savedInstanceState)
         recView_settings.apply {
             layoutManager = LinearLayoutManager(activity)
